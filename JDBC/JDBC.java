@@ -1,4 +1,4 @@
-package com.test.web;
+package com.kico.jdbc;
 
 import java.sql.*;
 
