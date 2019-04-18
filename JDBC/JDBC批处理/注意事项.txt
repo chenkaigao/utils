@@ -1,0 +1,2 @@
+批处理：	MySQL默认不支持批处理
+		打开批处理需要在数据库地址（数据库名）后面加上?rewriteBatchedStatements=true（5.1.7版本不支持）
