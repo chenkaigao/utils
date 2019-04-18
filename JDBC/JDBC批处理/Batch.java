@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Batch {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args){
         Connection conn = JDBCUtils.getCoonection();
         PreparedStatement ps = null;
         try {
