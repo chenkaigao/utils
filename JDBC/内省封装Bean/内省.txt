@@ -1,0 +1,18 @@
+						内省机制	
+是用于查看和操作JavaBean的属性
+
+通过Introspector（自省者）调用getBeanInfo(Student.class，Object.class)获取属性信息BeanInfo(加Object.class意思是不获取指定类即Object类的信息)
+
+再通过属性信息BeanInfo调用getPropertyDescriptors()获取属性描述器PropertyDescriptor[]（数组表示里面很多属性描述器）
+
+然后遍历属性描述器数组PropertyDescriptor[]来拿到每一个属性描述器
+
+通过属性描述器可以获得所有属性名称pd.getName()	（打印的时候会多出来一个Class属性，这是父类Object类的属性，这是因为调用getBeanInfo(Student.class，Object.class)时没有加上Object.class）
+获取所有属性名称
+System.out.println(pd.getName());
+获取所有get方法
+System.out.println(pd.getReadMethod());
+获取所有set方法
+System.out.println(pd.getWriteMethod());
+调用set方法
+pd.getWriteMethod().invoke(stu,"111"（这里是可变参数）);	（设置所有属性为"111"如果属性类型不对会编译错误）
