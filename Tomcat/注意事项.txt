@@ -1,0 +1,4 @@
+Tomcat文件夹下webapps文件夹存放的是Tomcat发布的项目
+点击Bin目录下的startup.bat文件运行Tomecat前需要在环境变量中设置JAVA_HOME=C:\Program Files\Java\jdk1.8.0_191
+(后面不需要到BIn目录下)，如果没有配置环境变量，则程序会一闪而过。
+Tomcat服务器端口号默认8080
