@@ -11,7 +11,19 @@ Tomcat服务器端口号默认8080
 web应用目录结构		html.jsp.js文件
 			WEB-INF文件夹		classes文件夹（放JAVA程序编译后的字节码文件）
 						lib文件夹（放程序运行需要的jar包）
-						web.xml（当前程序的核心配置文件）
+						web.xml（当前程序的核心配置文件） 	
 
 
 
+在web.xml里加上<absolute-ordering/>优化Tomcat服务器运行速度
+
+
+
+servlet执行过程		servlet是运行在Tomcat服务器上的程序，当我们在浏览器上输入项目地址后再写入对应的servletPath,就会到web.xml里面找对应的path,
+			通过servlet-mapping就可以找到对应的servlet类的全路径名称(以为着拿到了字节码Class.forName(""))，通过这个名称利用反射机制创建实例，
+			同样通过发射获取里面的方法，然后调用方法。这就是调用servlet的过程。
+
+
+web.xml			servlet-path可以有三种匹配方式		1.完全匹配	/abc
+								2.目录匹配	abc/*		只要前面的目录为abc
+			目录匹配不能和扩展名匹配一起使用	3.扩展名匹配	*.abc		只要后面的扩展名为abc
