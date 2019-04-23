@@ -1,0 +1,16 @@
+servlet执行过程		servlet是运行在Tomcat服务器上的程序，当我们在浏览器上输入项目地址后再写入对应的servletPath,就会到web.xml里面找对应的path,
+			通过servlet-mapping就可以找到对应的servlet类的全路径名称(以为着拿到了字节码Class.forName(""))，通过这个名称利用反射机制创建实例，
+			同样通过发射获取里面的方法，然后调用方法。这就是调用servlet的过程。
+
+
+web.xml			servlet-path可以有三种匹配方式		1.完全匹配	/abc
+								2.目录匹配	abc/*		只要前面的目录为abc
+			目录匹配不能和扩展名匹配一起使用	3.扩展名匹配	*.abc		只要后面的扩展名为abc
+			4.省缺匹配	/		当在自己项目里面的web.xml里边找不到匹配的url则会去Tomcat全局的web.xml里边匹配，
+							由于全局的web.xml里边有省缺匹配/，则会调用DefaultServlet类，这个类会去项目根目录
+							里去匹配有没有指定名称的静态文件，如果有则会把里面的内容逐行来去读出，写到响应
+
+
+web.xml里面metadata-complete=true代表不会去扫描servlet的注解，需要改成false才能使用注解的形式。
+
+servlet里边如果调用了service方法就不会调用doget或者dopust方法
