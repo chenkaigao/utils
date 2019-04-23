@@ -1,4 +1,4 @@
-package com.kico.jdbcutil;
+package com.kico.test;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 
@@ -17,7 +17,9 @@ public class JDBCUtils {
         try {
             //读取配置文件
             Properties p = new Properties();
-            FileInputStream in = new FileInputStream("resouce/db.properties");
+            //获取db.properties编译后项目所在的绝对路径
+            String path = JDBCUtils.class.getClassLoader().getResource("db.properties").getPath();
+            FileInputStream in = new FileInputStream(path);
             p.load(in);
             //创建连接池
             ds = DruidDataSourceFactory.createDataSource(p);
