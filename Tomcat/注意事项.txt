@@ -29,3 +29,5 @@ web.xml			servlet-path可以有三种匹配方式		1.完全匹配	/abc
 			目录匹配不能和扩展名匹配一起使用	3.扩展名匹配	*.abc		只要后面的扩展名为abc
 
 web.xml里面metadata-complete=true代表不会去扫描servlet的注解，需要改成false才能使用注解的形式。
+
+servlet里边如果调用了service方法就不会调用doget或者dopust方法
