@@ -19,3 +19,7 @@ web应用目录结构		html.jsp.js文件
 
 
 
+浏览器完整访问流程：域名查找www.***.com===》到该电脑中Tomcat引擎有监听8080端口号(Tomcat默认)===》进入Tomcat服务器引擎，创建request,respons
+			===》引擎检查哪个主机www.***.com中的应用===》根据www.***.com后面的名称去对应的应用中寻找对应的项目===》默认加载index.html
+			===》通过对应的servlet到该项目中的web.xml寻找对应的url-patten===》找到该servlet的全类名通过反射机制创建servlet类
+			===》调用init方法和service方法
