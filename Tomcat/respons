@@ -17,7 +17,7 @@
                         respons.getWriter().write("<h1>it666</h1>")如果字符中有html，浏览器会解析
                         respons.getWriter().write("撩课")中文乱码因为缓冲区使用的编码不支持中文
                         
-          写文件        FileInputStream in = new FileInputStream(path)
+          写图片        FileInputStream in = new FileInputStream(path)
                         ServletOutputStream out = respons.getOutputStream()
                         Byte[] buffer = new Byte[1024]
                         int len = 0;
