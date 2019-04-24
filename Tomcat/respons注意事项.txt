@@ -1,0 +1,67 @@
+设置状态码			respons.setStatus(302)
+
+
+
+
+
+
+添加响应头			respons.addHeader("name","kico")
+
+				respons.addIntHeader("age",20)
+
+				respons.addDataHeader("my-data",new data().getTime())
+
+
+
+设置响应头			respons.setHeader("name","kico")
+
+				respons.setIntHeader("age",20)
+
+				respons.setDataHeader("my-data",new data().getTime())
+
+
+
+设置重定向			respons.setStatus(302)    respons.setHeader("location","/资源名称")===respons.sendRedirect("/资源名称")
+
+重定向				浏览器访问了两次，第一次手动，第二次自动访问
+定时刷新
+
+
+ 				respons.setHeader("refresh","3;url=/资源名称")3秒后转发
+
+
+
+设置响应体 	写字符		respons.getWriter().write("it666")
+
+				respons.getWriter().write("<h1>it666</h1>")如果字符中有html，浏览器会解析
+
+				respons.getWriter().write("撩课")中文乱码因为缓冲区使用的编码不支持中文
+
+		写图片		FileInputStream in = new FileInputStream(path)
+
+				ServletOutputStream out = respons.getOutputStream()
+
+				Byte[] buffer = new Byte[1024]
+
+				int len = 0;
+
+ 				while((len = in.read(buffer)) != -1){         	      //in.read(buffer)读文件装进数组buffer
+
+					System.out.println(new String(buffer,0,len))
+
+					out.write(buffer,0,len)                       //out.write(buffer,0,len)把数组里的文件通过输出流写到浏览器中去
+
+                       		 }
+ 
+				in.close()					//要关闭插入的管子
+		 		注意点：getWrite()和getOutputStream()不能同时使用否则会报错
+
+
+
+
+设置缓冲区编码			respons.setCharacterEncoding("UTF-8")
+告诉浏览器使用UTF-8接收
+				respons.setHeader("content-Type","text/html;charset=UTF-8")===respons.setContentType("text/html;charset=UTF-8")
+只需要使用
+				respons.setContentType("text/html;charset=UTF-8")就可以不设置缓冲区编码，要放在设置响应体之前设置
+                        
