@@ -23,5 +23,5 @@ web应用目录结构		html.jsp.js文件
 			===》引擎检查哪个主机www.***.com中的应用===》根据全局的web.xml找www.***.com后面的名称对应的项目
 			===》（默认加载index.html）===》通过对应的servlet到该项目中的web.xml寻找对应的url-patten
 			===》创建request,respons对象给对应的servlet类===》通过反射机制创建servlet类
-			===》调用init方法和service方法===》respons写的内容会放到respons缓冲区===》引擎就会从缓冲区里面取出写的内容，并且额外的添加			      一些信息，然后响应给浏览器。
+			===》调用init方法和service方法===》respons写的内容会放到respons缓冲区===》引擎就会从缓冲区里面取出写的内容，并且额外的添加			      一些服务器相关的信息，然后响应给浏览器。
 			
