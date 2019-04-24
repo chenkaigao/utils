@@ -41,7 +41,7 @@
 
 				ServletOutputStream out = respons.getOutputStream()
 
-				Byte[] buffer = new Byte[1024]
+				byte[] buffer = new byte[1024]
 
 				int len = 0;
 
