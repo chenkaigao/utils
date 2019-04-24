@@ -14,3 +14,5 @@ web.xml			servlet-path可以有三种匹配方式		1.完全匹配	/abc
 web.xml里面metadata-complete=true代表不会去扫描servlet的注解，需要改成false才能使用注解的形式。
 
 servlet里边如果调用了service方法就不会调用doget或者dopust方法
+
+当浏览器向服务器发送中文参数的时候，如果报错RFC 3986是因为高版本的Tomcat有一个规范，不允许url中出现中文。可以到Tomcat配置中做放行
