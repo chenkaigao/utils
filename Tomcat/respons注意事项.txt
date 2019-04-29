@@ -60,8 +60,7 @@
 
 
 设置缓冲区编码			respons.setCharacterEncoding("UTF-8")
-告诉浏览器使用UTF-8接收
-				respons.setHeader("content-Type","text/html;charset=UTF-8")===respons.setContentType("text/html;charset=UTF-8")
-只需要使用
-				respons.setContentType("text/html;charset=UTF-8")就可以不设置缓冲区编码，要放在设置响应体之前设置
+告诉浏览器使用UTF-8接收		respons.setHeader("content-Type","text/html;charset=UTF8")
+
+只需要使用			respons.setContentType("text/html;charset=UTF-8")就可以不设置缓冲区编码，要放在设置响应体之前设置
                         
