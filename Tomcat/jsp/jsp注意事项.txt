@@ -1,0 +1,29 @@
+jsp本质就是一个servlet	在第一次访问web容器的时候会被翻译成servlet
+访问index.jsp	会翻译成index_jsp.java的文件	然后编译成index_jsp.class运行
+index_jsp.java文件的内容就是servlet一行一行的write("<h1>网页</h1>")出来响应给服务器
+
+
+
+在jsp文件里面有三种方式编写代码
+<%	String name2 = "果C";	%>		这种是写到service方法里边定义成员变量
+<%=	name2			%>		这种是写到service方法里边write出来
+<%!	String name1 = "果C";	%>		这种是写到servlet里边定义成员变量
+
+
+
+<!--1-->					可见范围1.html页面2.java源码3.jsp页面
+/*2*/						可见范围2.java源码3.jsp页面
+<%--3--%>					可见范围3.jsp页面
+
+
+
+jsp	page指令<%@ page contentType="text/html;charset=UTF-8" language="java" %>	设置页面相关信息
+	include指令<%@ include file="/header.jsp" %>	引入其他的代码或者jsp文件（静态包含，只生产一个java文件）
+	taglib指令
+	页面包含<jsp: include page="/header.jsp"></jsp:>	引入其他标签库（动态包含，生成多个java文件然后引入该java文件中）
+	请求转发<jsp:forward page="/index.jsp"></jsp:forward>
+
+
+
+隐式对象有9个，没有声明错误信息的时候只有8个，这些对象在翻译成servlet的时候就被创建，它们可以直接使用
+1.request   2.response   3.out   4.session   5.appliction   6.config   7.page   8.pagecontext   9.exception
