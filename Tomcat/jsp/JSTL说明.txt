@@ -1,0 +1,26 @@
+JSTL（JavaServer Pages Standard Tag Library，JSP标准标签库)
+它通常都是和EL表达式一起结合使用的
+
+它的作用是完成JSP页面逻辑
+
+JSTL有5个子标签库，主要掌握Core核心库
+需要引入jar包
+在JSP中引入<% taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	(prefix="c"是前缀)
+用的最多的两个标签：
+1.if标签		<c:if test="${1==1}"> 满足条件时，中间的内容才会显示出来</c:if>
+通常都是和EL表达式一起结合使用的，用EL从域中取数据，然后判断是否显示或者遍历	它里面没有else
+2.foreach标签
+普通循环
+<%--从域中取数据  自动把数据存到pageScope--%>
+<c:forEach begin="0" end="5" var="i">		(i实际上就是key值 0是最开始的value值)
+    ${i}<br>
+</c:forEach>		显示012345
+增强循环	
+<%--会自动把取出来的数值保存到pageScope中--%>			(遍历集合)
+<c:forEach items="${userList}" var="user">
+    ${user.user_name}<br>
+</c:forEach>
+
+<c:forEach items="${map}" var="entry">	（在pageScope存的是entry）			(遍历map)
+    ${entry.key}:${entry.value}<br>
+</c:forEach>

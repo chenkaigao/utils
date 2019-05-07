@@ -27,3 +27,5 @@ jsp	page指令<%@ page contentType="text/html;charset=UTF-8" language="java" %>	设
 
 隐式对象有9个，没有声明错误信息的时候只有8个，这些对象在翻译成servlet的时候就被创建，它们可以直接使用
 1.request   2.response   3.out   4.session   5.appliction   6.config   7.page   8.pagecontext   9.exception
+
+out对象write出来的信息会传入out缓冲区，等response信息传给response缓冲区后，把out缓冲区的信息拼接在response信息之后。

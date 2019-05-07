@@ -1,0 +1,17 @@
+EL（Expression Language）
+它可以嵌入在JSP页面内部
+减少JSP脚本的缩写
+
+作用是从四大域中取数据	
+1.pagecontext(${pageScope.key})   2.request(${requestScope.key})   
+3.session(${sessionScope.key})   4.appliction(${applictionScope.key})
+
+简写${key}   依次从1.pagecontext2.request3.session4.appliction中找，找到了就不会再往下找了
+
+
+EL表达式有11个对象
+常用的有1.pageScope   2.requestScope   3.sessionScope   4.applictionScope   5.pageContext
+pageContext:通过pageContext可以拿到JSP页面中的八大对象，其中可以通过${pageContext.request.contextPash}当前项目名称
+
+
+EL表达式：1.${1+1}   2.${empty user}为空显示true(不为空取反!empty)   3.${user == null?true:false}
