@@ -8,6 +8,7 @@ JSTL有5个子标签库，主要掌握Core核心库
 在JSP中引入<% taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	(prefix="c"是前缀)
 用的最多的两个标签：
 1.if标签		<c:if test="${1==1}"> 满足条件时，中间的内容才会显示出来</c:if>
+<c:if test="${empty str}">  str为空</c:if>
 通常都是和EL表达式一起结合使用的，用EL从域中取数据，然后判断是否显示或者遍历	它里面没有else
 2.foreach标签
 普通循环
