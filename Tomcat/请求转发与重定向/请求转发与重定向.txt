@@ -1,0 +1,9 @@
+请求转发浏览器只发送一次请求，地址栏不发生变化
+重定向发送两次，地址栏是发生改变
+
+重定向下面两种方法
+response.sendRedirect(request.getContextPath()+"/regist.jsp");
+response.setHeader("refresh", "2;url=" + request.getContextPath() + "/regist.jsp");
+
+请求转发
+request.getRequestDispatcher("/regist.jsp").forward(request,response);
