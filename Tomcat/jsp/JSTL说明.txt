@@ -25,3 +25,16 @@ JSTL有5个子标签库，主要掌握Core核心库
 <c:forEach items="${map}" var="entry">	（在pageScope存的是entry）			(遍历map)
     ${entry.key}:${entry.value}<br>
 </c:forEach>
+
+for循环获取序号varStatus="status"它是当前循环的角标从0开始
+<c:forEach items="${allGoodsList }" var="goods" varStatus="status">
+		
+		<ul class="list_goods_ul">
+			<li>${status.index + 1}</li>
+			<li><img src="${ctx }/images/goods/${goods.goods_img}" ></li>
+			<li>${goods.goods_desc }</li>
+			<li>${goods.goods_price }</li>
+			<li><a href="${ctx }/GoodsServlet?action=editUI&id=${goods.goods_id}"><img class="img_icon" src="${ctx }/admin/images/edit_icon.png" ></a></li>
+			<li><a href="${ctx }/GoodsServlet?action=delGoods&id=${goods.goods_id}"><img class="img_icon" src="${ctx }/admin/images/delete_icon.png"></a></li>
+		</ul>
+		</c:forEach>
