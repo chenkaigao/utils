@@ -1,0 +1,10 @@
+MVC		
+Model	View	Controller		MVC其实就是web层里面的 M javaBean V jsp C servlet
+Model		javaBean
+View		jsp
+Controller	servlet
+
+三层架构
+web		servlet
+service		service
+dao		dao

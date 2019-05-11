@@ -1,0 +1,1 @@
+在Service层加上@Transactional后就不要在Dao层加@Transactional否则无法更新和删除

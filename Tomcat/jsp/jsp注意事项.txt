@@ -2,6 +2,16 @@ jsp本质就是一个servlet	在第一次访问web容器的时候会被翻译成servlet
 访问index.jsp	会翻译成index_jsp.java的文件	然后编译成index_jsp.class运行
 index_jsp.java文件的内容就是servlet一行一行的write("<h1>网页</h1>")出来响应给服务器
 
+凡是Action src href后面都要去写上绝对路径
+因为浏览器跳转的时候，jsp里面的路劲都是相对于jsp的路劲
+而服务器跳转的时候，相对的路劲是工程项目的绝对路径	
+此时如果jsp不在项目路劲下的话，服务器跳转和浏览器跳转的路劲不一样，会导致CSS样式加载的时候会显示不出来，如下
+admin/css/***.css	此时浏览器跳转(直接开启页面)的话就会变成admin/admin/css/***.css	下面就是绝对路劲${ctx}
+<%
+	String ctx = request.getContextPath();
+	pageContext.setAttribute("ctx", ctx);
+%>
+
 
 
 在jsp文件里面有三种方式编写代码
