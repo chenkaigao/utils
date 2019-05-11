@@ -2,9 +2,6 @@ jsp本质就是一个servlet	在第一次访问web容器的时候会被翻译成servlet
 访问index.jsp	会翻译成index_jsp.java的文件	然后编译成index_jsp.class运行
 index_jsp.java文件的内容就是servlet一行一行的write("<h1>网页</h1>")出来响应给服务器
 
-页面自动跳转
-<%--加载这句话直接跳转到url=${ctx }/goods_getHotGoods.action"--%>
-<meta http-equiv="refresh" content="0;url=${ctx }/goods_getHotGoods.action"/>
 
 凡是Action src href后面都要去写上绝对路径
 因为浏览器跳转的时候，jsp里面的路劲都是相对于jsp的路劲
@@ -43,3 +40,23 @@ jsp	page指令<%@ page contentType="text/html;charset=UTF-8" language="java" %>	设
 1.request   2.response   3.out   4.session   5.appliction   6.config   7.page   8.pagecontext   9.exception
 
 out对象write出来的信息会传入out缓冲区，等response信息传给response缓冲区后，把out缓冲区的信息拼接在response信息之后。
+
+
+页面自动跳转
+<%--加载这句话直接跳转到url=${ctx }/goods_getHotGoods.action"--%>
+<meta http-equiv="refresh" content="0;url=${ctx }/goods_getHotGoods.action"/>
+
+<%--把浏览器分成上下两个窗口，上层是70px高度，下层*占满--%>
+<frameset rows="70,*" frameborder=0 border="0" framespacing="0">
+    <%--第一个topFrame是上层窗口--%>
+    <frame src="${ctx}/admin/top.jsp" name="topFrame" scrolling="NO" noresize>
+    <%--把下层窗口再拆分成左右两个窗口，左边宽度为250px，右边*占满--%>
+    <frameset cols="250,*" frameborder="0" border="0"  framespacing="10">
+        <%--leftFrame这是左边窗口--%>
+        <frame src="${ctx}/admin/left.jsp" name="leftFrame"  scrolling="NO">
+        <%--mainFrame这是右边窗口,此窗口自动跳转到goodsList.action--%>
+        <frame src="${ctx}/goodsList.action" name="mainFrame" >
+        
+    </frameset>
+    
+</frameset>
