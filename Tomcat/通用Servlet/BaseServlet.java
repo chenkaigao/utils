@@ -24,6 +24,7 @@ public class BaseServlet extends HttpServlet {
 		try {
 			//获取当前对象的字节
 			Class clazz = this.getClass();
+			//查询有没有此方法
 			Method method = clazz.getMethod(action, HttpServletRequest.class,HttpServletResponse.class);
 			//判断有没有传入的方法
 			if(method != null) {
