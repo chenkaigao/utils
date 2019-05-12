@@ -23,8 +23,9 @@ $("#reset").click(function () {
         	</div>  
 
 //让value的值等于商品goods_hot的option成为选中状态
+
 		 $("#isHotSel option[value=${goods.goods_hot}]").prop("selected",true);
-		
-		 $("#categorySel option[value=${goods.goods_cid}]").prop("selected",true);
+option[value=${goods.goods_hot}]这是给option赋值
+.prop("selected",true)这是让这个option成为选中状态
 
 <%--隐藏当前标签style="display:none"--%>
