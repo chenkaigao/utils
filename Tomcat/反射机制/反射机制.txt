@@ -2,3 +2,17 @@
 			对于任意一个对象，都能够调用它的任意一个方法和属性
 			这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制
 			想要使用反射，就必须要获取字节码文件
+
+
+直接调用字段和方法的时候，只能调用public字段和方法
+想要调用私有的:		//通过暴力反射获取私有字段
+			Field f3 = clazz.getDeclaredField("gender");
+			//去除私有权限
+			f3.setAccessible(true);
+
+调用私有方法：		//通过反射暴力获取私有方法
+			Method eat = clazz.getDeclaredMethod("eat", String.class);
+			//设置方法去除私有
+			eat.setAccessible(true);
+			//调用私有方法
+			eat.invoke(person1,"芒果");
