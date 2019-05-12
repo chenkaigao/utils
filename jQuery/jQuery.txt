@@ -1,0 +1,4 @@
+$("#reset").click(function () {
+        //重置页面其实就是刷新页面
+        $(window).attr("location","goods_addUI.action")
+    })
