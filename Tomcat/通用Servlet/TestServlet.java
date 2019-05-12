@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class TestServlet
  */
+//让这个类继承BaseServlet，BaseServlet这个类继承了HttpServlet
+//浏览器发送请求来到这个servlet，找service方法，这个类没有，就去父类BaseServlet方法找
 @WebServlet("/TestServlet")
 public class TestServlet extends BaseServlet {
 	
