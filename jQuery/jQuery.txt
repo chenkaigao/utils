@@ -2,3 +2,29 @@ $("#reset").click(function () {
         //重置页面其实就是刷新页面
         $(window).attr("location","goods_addUI.action")
     })
+
+
+<span>所属分类：</span>
+                 <select id="categorySel" name="goods_cid">
+                 	<c:forEach items="${allCategory }" var="category">
+                 	 <option value="${category.category_id }">${category.category_name }</option>
+                 	</c:forEach>
+                 </select>
+                 &nbsp;
+        	</div>
+        	
+        	<div>
+        		<span>是否热门：</span>
+                 <select id="isHotSel" name="goods_hot">
+                    <!-- 让value的值等于商品is_hot的option成为选中状态 -->
+                    <option value="0">否</option>
+                    <option value="1">是</option>
+                 </select>
+        	</div>  
+
+//让value的值等于商品goods_hot的option成为选中状态
+		 $("#isHotSel option[value=${goods.goods_hot}]").prop("selected",true);
+		
+		 $("#categorySel option[value=${goods.goods_cid}]").prop("selected",true);
+
+<%--隐藏当前标签style="display:none"--%>

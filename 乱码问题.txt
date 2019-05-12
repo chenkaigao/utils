@@ -1,0 +1,27 @@
+服务器乱码
+/*通用的解决乱码方式
+        String name = req.getParameter("name");
+        System.out.println(name);
+        byte[] bytes = name.getBytes("ISO8859-1");
+        String s = new String(bytes, "UTF-8");
+        System.out.println(s);*/
+
+        //现在使用的方法可以设置请求时使用的编码   只适用post提交方式     get方式使用无效
+        //form表单以后都是post方式提交
+        req.setCharacterEncoding("UTF-8");
+
+
+浏览器乱码
+设置缓冲区编码			respons.setCharacterEncoding("UTF-8")
+告诉浏览器使用UTF-8接收		respons.setHeader("content-Type","text/html;charset=UTF8")
+
+只需要使用			respons.setContentType("text/html;charset=UTF-8")就可以不设置缓冲区编码，要放在设置响应体之前设置
+
+不需要保存到数据库的数据使用get提交方式				get方式提交的数据，服务器在接收的时候不会编译成ISO8859-1
+需要保存到数据库的数据使用post提交方式				post方式提交的数据，服务器在接收的时候会编译成ISO8859-1的编码格式
+
+
+数据库乱码
+
+后面加上?useUnicode=true&characterEncoding=utf-8
+url=jdbc:mysql://localhost:3306/mystore?useUnicode=true&characterEncoding=utf-8&rewriteBatchedStatements=true
