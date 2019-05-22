@@ -8,7 +8,62 @@
 
 一级缓存	一级缓存是由session中一系列JAVA集合构成。是自带的，不可卸载。
 		调用方法的时候会把对象存在session中，当查询的时候先去缓存找，没有再去数据库查（所以缓存有的时候，就
-		不再向数据库发送SQL语句），调用close()方法时
-		缓存被清空
+		不再向数据库发送SQL语句），调用close()方法时缓存被清空。
+		因为session中有一级缓存区和快照区，持久态时，对象是session管理的，对象发生变化的时候，改变的是缓冲区
+		的数据，当transaction.commit()的时候，就会清理缓存，这时候就会和快照区的对象对比，如果有发生变化就
+		自动提交update语句。
 二级缓存	二级缓存是sessionFactory级别的缓存，需要自己配置，默认是开启的，再企业当中一般都不用，现在都用redis
+
+事务的隔离级别	<property name="hibernate.connection.isolation">4</property> 1.2.3.4分别对应级别
+
+事务		事务的开启一般都在Service层，外部dao层引用的连接session和内部service层开启事务的连接session必须是同		一个，否则没有效果。有两种方法可以让dao层和service层的session保持一致
+		1.在service层创建一个session赋值给dao层定义的session。
+		2.把session绑定到ThreadLocal线程上去，那么这个请求中获取到的session就都是同一个session。开发中都用这			种。
 		
+		在Hibernate中默认是不能用的，
+		需要配<property  name="current_session_context_class">thread</property>，
+		然后在在SessionFactory中，提供了一个方法，getCurrentSession（)方法获取session,这样做不需要close。
+
+
+
+多表查询	
+一对多		创建两张表，在多的一方创建一个外键，指向一的一方的主键
+
+多对多		创建一个中间表，中间表至少有两个字段，分别作为外键指向多对多双方的主键
+
+一对一		唯一外键对应/主键对应	一般直接写一张表，很少用一对一
+
+在配置关系映射文件时，外键是不需要写的<property name="link_cust_id" column="link_cust_id"/>
+一对多关联查询的时候，是使用懒加载的方式，当需要用到关联对象的时候，才发送SQL语句，如果在transaction.commit();
+之后查询，此时session关闭，就无法查询，就会报错no Session;
+解决办法，在关系映射文件中，在多对多关系中加上lazy="false"如下
+<many-to-one name="customer" class="com.it666.domain.Customer" column="link_cust_id" lazy="false"/>
+<!--一对多配置-->
+        <set name="linkmans" lazy="false"><!--set集合属性的名称     字段名称-->
+            <key column="link_cust_id"/><!--外键-->
+            <one-to-many class="com.it666.domain.Linkman"/><!--类全路径-->
+        </set>
+
+
+级联
+在操作一个对象的时候，是否会操作其关联的对象。
+级联保存或更新
+当保存对象的时候，只保存一边时，会报错org.hibernate.TransientObjectException(瞬时对象异常)，
+持久态对象关联一个瞬时对象。
+解决办法在关系映射文件中，在多对多关系中加上cascade="save-update"如下
+<!--一对多配置-->
+        <set name="linkmans" cascade="save-update" lazy="false"><!--set集合属性的名称     字段名称-->
+            <key column="link_cust_id"/><!--外键-->
+            <one-to-many class="com.it666.domain.Linkman"/><!--类全路径-->
+        </set>
+注意：级联保存的时候，由于是Set集合，所以保存的时候是由Set集合中取数据保存，所以顺序是无序的。
+
+
+		
+级联删除
+注意：默认删除的时候，如果被删除的类配置了级联保存，就会报错
+想去做级联的删除操作    必须配置cascade="save-update,delete"
+
+维护
+双向维护，用双向维护，修改了两个持久态类，快照区对比时会发送两次SQL语句，同时更新了同一个外键
+在配置中设置inverse="true"    让一方放弃外键维护权	外键在谁的就让谁维护	false是不放弃
