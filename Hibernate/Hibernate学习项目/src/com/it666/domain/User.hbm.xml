@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.it666.domain.User" table="user">
+        <!--建立类属性哪一个是主键 还要跟数据库当中的主键进行对应-->
+        <id name="user_id" column="user_id">
+            <generator class="native"/>
+        </id>
+        <!--建立类中的普通属性与数据库当中字段进行关联-->
+        <property name="user_code" column="user_code"/>
+        <property name="user_name" column="user_name"/>
+        <property name="user_password" column="user_password"/>
+        <property name="user_state" column="user_state"/>
+
+        <!--
+        多对多配置
+        name="roles"        当前Set集合属性名称     字段名
+        cascade="save-update,delete"                级联操作
+        table="user_role"   多对多中间表            表名
+        column="user_id"    当前表的外键
+        class="com.it666.domain.Role"   集合中对象类的全路径
+        column="role_id"    集合中对象的外键
+        -->
+        <set name="roles" table="user_role" cascade="save-update,delete">
+            <key column="user_id"/>
+            <many-to-many class="com.it666.domain.Role" column="role_id"/>
+        </set>
+        
+    </class>
+</hibernate-mapping>

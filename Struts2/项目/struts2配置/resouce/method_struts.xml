@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <package name="method" extends="struts-default">
+        <!--<action name="add" class="com.itlike.struts2.MethodAction" method="add">
+            <result name="success">/hello.jsp</result>
+        </action>
+        <action name="delete" class="com.itlike.struts2.MethodAction" method="delete">
+            <result name="success">/hello.jsp</result>
+        </action>
+        <action name="update" class="com.itlike.struts2.MethodAction" method="update">
+            <result name="success">/hello.jsp</result>
+        </action>
+        <action name="find" class="com.itlike.struts2.MethodAction" method="find">
+            <result name="success">/hello.jsp</result>
+        </action>-->
+        <!--
+        允许通过通配符访问的方法	必须写在<result name="success">/hello.jsp</result>下面
+        <allowed-methods>add,delete,update,find</allowed-methods>
+        -->
+        <!--
+        <global-allowed-methods>add,delete,update,find</global-allowed-methods>
+        允许package name="method"这个包当中全局可以使用add,delete,update,find这些方法
+        -->
+        <action name="method_*" class="com.itlike.struts2.MethodAction" method="{1}" >
+            <result name="success">/hello.jsp</result>
+            <allowed-methods>add,delete,update,find</allowed-methods>
+        </action>
+    </package>
+</struts>

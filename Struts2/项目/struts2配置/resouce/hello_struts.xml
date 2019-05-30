@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <package name="hello" extends="struts-default">
+        <action name="hello1" class="com.itlike.struts2.HolleAction1" method="execute" >
+            <result name="success">/hello.jsp</result>
+        </action>
+        <action name="hello2" class="com.itlike.struts2.HelloAction2">
+            <result name="success">/hello.jsp</result>
+        </action>
+        <action name="hello3" class="com.itlike.struts2.HelloAction3">
+            <result name="success">/hello.jsp</result>
+        </action>
+    </package>
+</struts>

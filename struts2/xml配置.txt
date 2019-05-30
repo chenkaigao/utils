@@ -1,7 +1,0 @@
-允许通过通配符访问的方法	必须写在<result name="success">*******</result>下面
-<allowed-methods>save,delete,update,find</allowed-methods>
-
-
-
-Dao层继承HibernateDaoSuppor需要注入会话工厂sessionFactory
-<property name="sessionFactory" ref="sessionFactory"/>

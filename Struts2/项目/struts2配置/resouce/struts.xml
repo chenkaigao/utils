@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <!--
+    package name="struts"   包名，管理action的，只要在一个项目中不重名即可。
+    extends="struts-default"继承struts-default这个包，就可以拥有action中的中能，如封装..等等
+    namespace="/aaa"        名称空间，只有/aaa/hello.action才能访问到，/hello.action不可以访问到
+    abstract="true"         抽象的，用于其他包的继承,设置成abstract后就不能用自己运行了
+    action name="hello"     与namespace共同决定访问路径
+    class=""                Action类的全路径
+    method=""               执行Action中的哪个方法的方法名，默认值execute
+    converter=""            用来自定义类型转换器，一般不设置，内部提供的转换器已经够用
+    <result name="success">/hello.jsp</result>   返回结果页
+    -->
+    <!--
+    <constant name="struts.action.extension" value="action"/>   修改Struts2常量的值
+    -->
+    <!--<package name="hello" extends="struts-default">
+        <action name="hello" class="com.itlike.struts2.HolleAction1" method="execute" >
+            <result name="success">/hello.jsp</result>
+        </action>
+        <action name="hello2" class="com.itlike.struts2.HelloAction2">
+            <result name="success">/hello.jsp</result>
+        </action>
+        <action name="hello3" class="com.itlike.struts2.HelloAction3">
+            <result name="success">/hello.jsp</result>
+        </action>
+    </package>-->
+    <!--引入另外一个配置文件，struts.xml文件-->
+    <include file="hello_struts.xml"/>
+    <include file="method_struts.xml"/>
+    <include file="method1_struts.xml"/>
+</struts>

@@ -1,3 +1,25 @@
+注意点：
+允许通过通配符访问的方法	必须写在<result name="success">*******</result>下面
+<allowed-methods>save,delete,update,find</allowed-methods>
+
+包全局通配符	
+<global-allowed-methods>add,delete,update,find</global-allowed-methods>如下写法
+    <package name="method" extends="struts-default">
+	<!--
+        <global-allowed-methods>add,delete,update,find</global-allowed-methods>
+        允许package name="method"这个包当中全局可以使用add,delete,update,find这些方法
+        -->
+	<action name="method_*" class="com.itlike.struts2.MethodAction" method="{1}" >
+            <result name="success">/hello.jsp</result>
+            <allowed-methods>add,delete,update,find</allowed-methods>
+        </action>
+    </package>
+
+Dao层继承HibernateDaoSuppor需要注入会话工厂sessionFactory
+<property name="sessionFactory" ref="sessionFactory"/>
+
+
+
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!DOCTYPE struts PUBLIC
@@ -13,6 +35,7 @@
     class=""                Action类的全路径
     method=""               执行Action中的哪个方法的方法名，默认值execute
     converter=""            用来自定义类型转换器，一般不设置，内部提供的转换器已经够用
+    <result name="success">/kico.jsp</result>   返回结果页
     -->
     <package name="struts1" extends="struts-default" namespace="/aaa">
         <action name="hello" class="com.itlike.struts2.HolleAction" method="execute" />
@@ -25,3 +48,5 @@
     <!--引入另外一个配置文件，struts.xml文件-->
     <include file="kico_struts.xml"/>
 </struts>
+
+
