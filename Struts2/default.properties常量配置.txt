@@ -1,0 +1,25 @@
+struts.i18n.encoding=UTF-8		Struts2中所有的post请求的中文乱码不用处理。
+struts.action.extension=action,,	Struts2请求的默认的扩展名。默认扩展名是.action或者什么都不写。两个,,逗号意思是可以不写.action这个扩展名
+
+
+在Struts2中修改一些常量的值（在default.properties当中的值是不允许直接修改的）
+修改常量的值，可以有三个位置进行修正：一般只用第一种方法
+1.struts.xml中进行修改：通过<constant>标签
+    <constant name="struts.action.extension" value="action"/>   修改常量的值
+    <package name="struts1" extends="struts-default" namespace="/aaa">
+        <action name="hello" class="com.itlike.struts2.HolleAction" method="execute" />
+    </package>
+2.struts.properties中进行修改：自己新建的， 只能修改常量，基本不使用
+3.web.xml中进行修改：通过过滤器的初始化参数来修改常量 
+    <filter>
+        <filter-name>action2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+        <init-param>
+            <param-name>struts.action.extension</param-name>
+            <param-value>action</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>action2</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
