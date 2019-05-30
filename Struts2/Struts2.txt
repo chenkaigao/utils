@@ -1,0 +1,2 @@
+Struts2是web层的框架
+它是一个前端控制器，封装数据，过滤action,再拦截action.
