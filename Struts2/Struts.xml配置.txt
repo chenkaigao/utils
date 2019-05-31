@@ -15,6 +15,14 @@
         </action>
     </package>
 
+全局结果页设置
+使用场景：有些功能需要用户登录才能使用，只要没有登录，就让它返回到登录页面，很多地方都要返回到登录，所以可以把登录页做为一个全局的
+	<!--全局结果页设置，先到自己的action找结果页，没有的话去全局找-->
+        <global-results>
+            <result name="login">/login.jsp</result>
+        </global-results>
+
+
 Dao层继承HibernateDaoSuppor需要注入会话工厂sessionFactory
 <property name="sessionFactory" ref="sessionFactory"/>
 
