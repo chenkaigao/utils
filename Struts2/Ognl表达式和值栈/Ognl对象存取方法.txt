@@ -1,0 +1,59 @@
+根对象的存取setRoot()
+public void test1(){
+        //ognl使用
+        OgnlContext ognlContext = new OgnlContext();
+        //存数据   根对象
+        ognlContext.setRoot("aaa");
+        //取数据   根对象
+        Object obj = Ognl.getRoot(ognlContext);
+        System.out.println(obj);
+    }
+根对象可以直接取字段
+    public void test2() throws OgnlException {
+        //ognl使用
+        OgnlContext ognlContext = new OgnlContext();
+        //存数据   根对象
+        Goods goods = new Goods();
+        goods.setName("it666");
+        goods.setPrice(888d);
+        ognlContext.setRoot(goods);
+        //取数据   根对象
+        //获取root
+        Object root = ognlContext.getRoot();
+        //1.表达式     取哪个字段
+        //2.ognlContext
+        //3.root
+        Object name = Ognl.getValue("name", ognlContext, root);
+        System.out.println(name);
+    }
+非根对象的存取，它使用put()，它不能直接取字段，并且在key前面加#	如："#goods"
+    public void test3() throws OgnlException {
+        //ognl使用
+        OgnlContext ognlContext = new OgnlContext();
+        //存数据    非根对象
+        Goods goods = new Goods();
+        goods.setName("it666");
+        goods.setPrice(888d);
+        ognlContext.put("goods",goods);
+        //取数据   非根对象是不能取哪一个字段，取得时候  取得就是存的内容
+        Object root = ognlContext.getRoot();
+        //1.表达式    #key
+        //2.ognlContext
+        //3.root
+        Goods goods1 = (Goods)Ognl.getValue("#goods", ognlContext,root);
+        System.out.println(goods1);
+    }
+
+
+调用方法
+public void test4() throws OgnlException {
+        //ognl使用
+        OgnlContext ognlContext = new OgnlContext();
+        Object root = ognlContext.getRoot();
+        //调用对象的普通方法
+        Object value1 = Ognl.getValue("'hello'.length()", ognlContext, root);
+        System.out.println(value1);
+        //调用静态方法
+        Object value2 = Ognl.getValue("@java.lang.Math@random()", ognlContext, root);
+        System.out.println(value2);
+    }
