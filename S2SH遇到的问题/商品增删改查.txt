@@ -1,0 +1,19 @@
+1.添加和修改
+不能用update()或者save()方法，因为hibernate框架里的会话session中管理了
+一个相同ID的商品，如果此时使用update()或者save()，则此商品会被session
+管理就成为了持久化对象，此时session中就会有两个相同ID的对象，这是session
+不允许的。但是使用merge()方法，它不会使传入的对象持久化。
+
+merge()方法说明：
+当调用merge()对象时，无需考虑session中是否已经包含同样id的实体对象，如果session中没有同样id的实体对象，hibernate会通过select语句，从数据库中查询出对应对象，如果数据库中没有对应对象，就新建一个。同时，完成merge()操作后，会返回数据库中对应的persistent状态对象，而原有的，作为参数传入的实体对象，仍然是detatch状态，后续代码对其的修改，无法合并到数据库中。
+
+
+
+
+2.删除：
+在删除商品的时候出了问题
+用了俩个cascade="save-update" 出了问题， 
+对于表的操作控制权只能由 “一方”来管理。
+设置  <many-to-one name="category" class="" inverse=“true"/>
+那么控制权就掌握在goods方，goods就能“修改 删除 插入”数据，而 card却不能。
+
