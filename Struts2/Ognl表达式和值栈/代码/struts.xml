@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <!--name="struts.devMode" value="true"当前处于开发模式-->
+    <constant name="struts.devMode" value="true"/>
+    <!--在页面当中允许静态方法的访问-->
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+    <package name="sturts" extends="struts-default">
+        <action name="hello" class="com.it666.web.HelloAction" >
+            <result name="success">/success.jsp</result>
+        </action>
+    </package>
+</struts>

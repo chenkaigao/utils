@@ -1,0 +1,59 @@
+1.在页面中查看值栈信息
+要在jsp页面当中看到值栈信息，必须做如下操作，否则是看不到的。
+1.struts.xml配置常量，使其成为开发模式
+<struts>
+    <!--name="struts.devMode" value="true"当前处于开发模式-->
+    <constant name="struts.devMode" value="true"/>
+    <package name="sturts" extends="struts-default">
+        <action name="hello" class="com.it666.web.HelloAction" >
+            <result name="success">/success.jsp</result>
+        </action>
+    </package>
+</struts>
+2.在JSP页面中引入标签库
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<s:debug></s:debug>
+<h1>success</h1>
+</body>
+</html>
+
+
+2.在页面展示值栈的信息
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<%--取根元素数据    value里面写的是ognl表达式    只能取栈顶的数据--%>
+用户名称：<s:property value="name"/><br>
+用户的商品：<s:property value="goods"/><br>
+商品的名称：<s:property value="goods.name"/><br>
+商品的价格：<s:property value="goods.price"/><br>
+<%--在页面中调用普通方法--%>
+用户名称的长度：<s:property value="name.length()"/><br>
+<%--在页面中调用静态方法--%>
+hello的长度：<s:property value="'hello'.length()"/><br>
+<s:property value = "@java.lang.Math@floor(12.34)" /><br>
+生产一个随机数：<s:property value="@java.lang.Math@random()"/><br>
+<%--取非根元素数据     value里面写的是ognl表达式--%>
+request域reqName的值：<s:property value="#reqName"/><br>
+session域sessionName的值：<s:property value="#session.sessionName"/><br>
+application域applicationName的值<s:property value="#application.applicationName"/><br>
+<s:debug></s:debug>
+<h1>success</h1>
+</body>
+</html>
+
+3.在页面当中使用ognl表达式访问静态方法需要注意两点：
+1.在struts.xml配置常量
+	<!--在页面当中允许静态方法的访问-->
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+2.在value里边写静态类，要写全路径。还要在前后加上@，然后在写入方法格式如下：
+<s:property value="@java.lang.Math@random()"/>

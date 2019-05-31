@@ -1,0 +1,27 @@
+值栈的核心就是OgnlContext 
+ValueStack实际上就是一个容器。是一个接口,实现类为OgnlValueStack
+ValueStack贯穿整个action的生命周期，action一旦创建，就会创建一个valuestack对象，valuestack包含了所有的域对象
+（存到域当中只能在页面中把它取出来。存到值栈当中可以在任何地方取出数据：1.页面中取出2.action中取出3.在配置文件当中取出）
+当用户每次访问action对象的业务方法时, 会先创建ActionContext对象，OgnlValueStack对象，Action对象，所有发送的数据都在OgnlValueStack里边
+它由Struts框架创建，当前端页面如jsp发送一个请求时，Struts的默认拦截器会将请求中的数据进行封装，并入ValueStack的栈顶。Struts框架中的数据就都保存到了ValueStack中，不存到域当中了。即使存在域中，也会被存入ValueStack中。
+
+ActionContext context = ActionContext.getContext();获取的就是ActionContext,它里面还有非根区(OgnlContext和valueStack里的非根区是同一个对象)
+ValueStack valueStack = context.getValueStack();获取的就是OgnlValueStack
+valueStack的实现类是OnglvalueStack,它里面有根区root(CompoundRoot)和非根区(OgnlContext)。
+
+根区的	入栈
+	/*valueStack.getRoot().push(goods);下面是简写*/
+        valueStack.push(goods);
+        出栈
+        /*valueStack.getRoot().pop();*/
+        /*valueStack.pop();*/
+非根区的存入
+	//往request域写入参数
+        context.put("reqName","reqValue");
+        //往session
+        context.getSession().put("sessionName","sessionValue");
+        //往Application
+        context.getApplication().put("applicationName","applicationValue");
+
+
+注意：非根区中的request域中包含了值栈（struts.valueStack），所以跳转页面中是可以拿到根区数据。
