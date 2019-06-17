@@ -1,0 +1,72 @@
+什么是IOC
+
+IOC: Inversion of Control(控制反转)
+控制反转：将对象的创建权反转给（交给）Spring。
+传统开发模式是在代码中创建实现类对象，当实现类发生变化的时候，就需要修改源码。
+把创建实现类的任务交给Spring，有Spring工厂来创建实现类，我们只需在配置中修改实现类的地址，这样就不需要修改源代码。
+根据配置文件中的类名，通过反射创建对象。
+
+
+什么是DI
+
+依赖注入:给spring管理类当中依赖的属性,通过配置文件进行赋值的过程
+1.实现类当中的属性要提供set方法
+2.在配置文件当中配置依赖注入
+
+
+
+在加载核心配置文件applicationContext.xml时，就会创建它所管理的所有类的对象，并且调用所有对象的init方法。当工厂关闭时，所有的对象都会销毁，并执行destroy方法。
+scope="prototype"多例，action类需要使用多例，因为每一次发送的请求都不一样，所以需要是
+多例，当它是多例的情况下，工厂关闭，它不会调用destroy方法，它是垃圾回收。
+
+引入另一个配置文件<import resource="applicationContext2.xml"/>
+
+spEL表达式注入：
+<bean id="student" class="com.it666.demo4.Dog">
+        <property name="name" value="#{'stu'}"/>
+        <property name="age" value="#{18}"/>
+        <property name="dog" value="#{dog}"/>
+	<property name="dogName" value="#{dog.name}"/>
+</bean>
+
+p名称空间属性注入：
+xmlns:p="http://www.springframework.org/schema/p"
+上面这行要加入才能使用
+<bean id="student" class="com.it666.demo4.Student" p:name="stu" p:age="18" p:dog-ref="dog">
+</bean>
+
+数组注入：
+public String attr[];	然后提供set方法
+
+	<property name="attr">
+            <list>
+                <value>zs</value>
+                <value>ls</value>
+                <value>ww</value>
+            </list>
+        </property>
+集合注入：
+        <property name="myList">
+            <list>
+                <value>123</value>
+                <value>"王五"</value>
+                <value>"do"</value>
+            </list>
+        </property>
+set集合注入：
+        <property name="mySet">
+            <set>
+                <value>66</value>
+                <value>333</value>
+                <value>999</value>
+                <value>0</value>
+            </set>
+        </property>
+map集合注入：
+        <property name="myMap">
+            <map>
+                <entry key="key1" value="value1"></entry>
+                <entry key="key2" value="value2"></entry>
+                <entry key="key3" value="value3"></entry>
+            </map>
+        </property>
