@@ -1,0 +1,28 @@
+1.引入需要的包spring-aop-5.0.7.RELEASE.jar
+2.在配置文件中	<!--指定注解扫描包-->
+    <context:component-scan base-package="com.itlike.demo1"/>
+3.在对应的类中加上注解
+@Component("id")		把这个类交给Spring	它衍生出下面三种注解
+1.@Controller("id")		Spring接管web层
+2.@Service("id")		Spring接管service层
+3.@Repository("id")		Spring接管dao层		
+4.对应的属性上加上注解
+@Value("")			普通赋值
+@Autowired			对象赋值@Autowired后边不需要写名称，
+它是自动去spring中按照类型找这个类型，找到后创建对象然后赋值(如果想根据名称的话在它下面加上@Qualifier("id")	)
+@Resouce(name="")		对象赋值	比@Autowired好用
+@PostConstruct			初始化方法	初始化的时候自动调用
+@PreDestroy			销毁方法	销毁的时候自动调用
+@scope				作用范围	默认是单例@scope("singleton")，设置多例@scope("prototype")
+单例的对象在spring工厂关闭的时候会销毁，多例的对象就不会被销毁。（多例每次一获取的对象都不一样）他由垃圾回收功能回收
+
+
+比较：
+XML可以适用任何场景 ，结构清晰，维护方便
+注解只能在自己提供的类上使用，别人提供的工具类写不进去，但是开发简单方便
+
+结合开发：
+1.XML管理Bean
+2.注解完成属性注入
+3.XML中提供属性注入<context:annotation-config/>
+在没有扫描的情况下， 使用属性注解@Resource @Value @Autowired @Qulifier
