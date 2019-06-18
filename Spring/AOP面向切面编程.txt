@@ -1,0 +1,27 @@
+在软件业，AOP为Aspect Oriented Programming的缩写，意为：面向切面编程
+
+不破坏原来的类，生成一个代理类，在原来类的基础上进行增强。可以随时添加，取消添加的功能。核心就是使用代理类。
+
+JDK动态代理：
+需要定义接口，然后提供一个代理类，代理类写一个方法返回一个代理对象。当这个对象调用方法时，就会经过回调函数
+public class GoodsJDKProxy {
+    public GoodsDao creatProxy(GoodsDao goodsDao){
+        //增强
+        GoodsDao goodsDao1 = (GoodsDao)Proxy.newProxyInstance(goodsDao.getClass().getClassLoader(),
+                goodsDao.getClass().getInterfaces(),
+                new InvocationHandler() {
+                    @Override/*当调用对象的时候，所有的方法都会来到这里*/
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                        if("save".equals(method.getName())){
+                            System.out.println("权限校验");
+                            GoodsDao goodsDao2 = (GoodsDao)method.invoke(goodsDao, args);
+                            System.out.println("日志添加");
+                            return goodsDao2;
+                        }
+                        return method.invoke(goodsDao,args);
+                    }
+                });
+        return goodsDao1;
+    }
+}
+
