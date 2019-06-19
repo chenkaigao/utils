@@ -1,0 +1,15 @@
+1.需要导入这个包spring-test-5.0.7.RELEASE.jar
+2.在测试类中加上注解，如下：
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:applicationContext.xml")
+public class AopTest {
+
+    @Resource(name = "goodsDao")
+    private GoodsDao goodsDao;
+
+    @Test
+    public void test(){
+        goodsDao.save();
+    }
+}
+这样就测试类中就有工厂，不需要再去创建工厂。可以直接注入工厂中被管理的类。
